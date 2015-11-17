@@ -1,7 +1,31 @@
 import * as types from '../constants/ActionTypes';
+import db, {mapDocsFromPouch} from './db';
+
+export function fetchTodos() {
+  return db.find({
+    selector: {type: "todo"}
+  }).then(function (res) {
+    return {
+      type: types.FETCH_TODOS,
+      todos: res.docs
+    }
+  }).catch(err => {
+    throw err
+  });
+}
 
 export function addTodo(text) {
-  return {type: types.ADD_TODO, text};
+  var userProperties = {
+    text: text,
+    type: 'todo'
+  };
+  return db.post(userProperties).then((res) => {
+    var document = Object.assign(userProperties, res);
+    return {
+      type: types.ADD_TODO,
+      todo: document
+    }
+  }).catch(err => {throw err});
 }
 
 export function deleteTodo(id) {

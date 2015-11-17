@@ -18,12 +18,15 @@
   "homepage": "http://rackt.github.io/redux",
   "dependencies": {
     "classnames": "^2.1.2",
-    "pouchdb": "^5.1.0",
+    "pouchdb": "^4.0.3",
+    "pouchdb-find": "^0.7.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
     "redux": "^3.0.0",
-    "redux-pouchdb": "0.0.5"
+    "redux-pouchdb": "0.0.5",
+    "redux-promise": "^0.5.0",
+    "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^5.6.18",

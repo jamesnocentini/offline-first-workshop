@@ -6,3 +6,5 @@ lib
 coverage
 _book
 .idea
+*.walrus
+tutorial.md

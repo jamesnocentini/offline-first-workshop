@@ -1,0 +1,15 @@
+{
+  "log": ["*"],
+  "CORS": {
+    "Origin":["http://localhost:3000"],
+    "LoginOrigin":["http://localhost:3000"],
+    "Headers":["Content-Type"],
+    "MaxAge": 1728000
+  },
+  "databases": {
+    "todos": {
+      "server": "walrus:",
+      "users": { "GUEST": { "disabled": false, "admin_channels": ["*"] } }
+    }
+  }
+}

@@ -3,12 +3,26 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Header from '../components/Header';
 import * as TodoActions from '../actions/todos'
+import * as UsersActions from '../actions/users';
 import TaskList from '../components/TaskList';
+import { fetchUsers } from '../actions/users';
+import { store } from './App';
+import UserList from '../components/UserList';
 
 class TodoApp extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    //var {dispatch} = this.props
+    this.props.actions.fetchUsers();
+    this.props.actions.fetchTodos();
+  }
+
   render() {
-    const { todos, actions } = this.props;
-    console.log("the documents are" + JSON.stringify(todos));
+    const { todos, actions, users } = this.props;
     return (
       <div className="main-container">
         <nav className="navbar navbar-default">
@@ -16,8 +30,8 @@ class TodoApp extends Component {
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <form className="navbar-form navbar-left" role="search">
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Name" />
-                  <input type="text" className="form-control" placeholder="Password" />
+                  <input type="text" className="form-control" placeholder="Name"/>
+                  <input type="text" className="form-control" placeholder="Password"/>
                 </div>
                 <button type="submit" className="btn btn-default">Login</button>
               </form>
@@ -27,30 +41,14 @@ class TodoApp extends Component {
         <div className="container">
           <Header addTodo={actions.addTodo}/>
           <div className="row">
-            <TaskList todos={todos} actions={actions} />
-            <div className="col-md-6">
-              <h1>Users</h1>
-              {this.renderUsers()}
-            </div>
+            <TaskList todos={todos} />
+            <UserList users={users} {...actions} />
           </div>
         </div>
       </div>
     )
   }
 
-  renderUsers() {
-    return (
-      <ul className="list-group">
-        {this.props.users.map(user =>
-          <li className="list-group-item">
-            <input
-              onChange={() => shareWithUser(user.id)}
-              type="checkbox"/> {user}
-          </li>
-        )}
-      </ul>
-    );
-  }
 }
 
 TodoApp.propTypes = {
@@ -65,12 +63,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  var actions = Object.assign(TodoActions, UsersActions);
   return {
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoApp)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp)

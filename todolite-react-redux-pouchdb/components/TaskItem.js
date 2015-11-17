@@ -8,7 +8,7 @@ class TaskItem extends Component {
         <input
           type="checkbox"
           checked={todo.completed}
-          onChange={() => completeTodo(todo.id)} /> {todo.text}
+          onChange={() => completeTodo(todo._id)} /> {todo.text} - by {todo.created_by || 'Guest'}
       </li>
     );
   }

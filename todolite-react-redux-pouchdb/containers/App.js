@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import TodoApp from './TodoApp';
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { Provider } from 'react-redux';
-import * as reducers from '../reducers';
+import reducer from '../reducers/index'
+import promise from 'redux-promise';
+import thunk from 'redux-thunk';
 
 const finalCreateStore = compose(
+  applyMiddleware(thunk, promise),
   devTools(),
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);
 
-const reducer = combineReducers(reducers);
-const store = finalCreateStore(reducer);
+export const store = finalCreateStore(reducer);
 
 if (module.hot) {
   module.hot.accept('../reducers', () =>
@@ -20,7 +22,7 @@ if (module.hot) {
   );
 }
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <div>
@@ -36,3 +38,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

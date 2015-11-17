@@ -1,3 +1,3 @@
-export function users(state = [], action) {
+export function users(state = ["william", "nic", "james"], action) {
   return state;
 }
