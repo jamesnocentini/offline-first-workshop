@@ -1,5 +1,7 @@
 ## Offline-first workshop
 
+[![Join the chat at https://gitter.im/jamiltz/offline-first-workshop](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jamiltz/offline-first-workshop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Playgrounds
 
 ### React
