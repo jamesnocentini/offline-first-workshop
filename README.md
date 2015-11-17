@@ -5,7 +5,6 @@
 ### React
 - [immutable.js maps and lists](https://jsbin.com/gajehulafo/edit?html,js,output)
 - [immutable.js to and from JS](https://jsbin.com/dajitimide/4/edit?html,js,output)
-- 
 
 ### ReactJS and Bootstrap
 
